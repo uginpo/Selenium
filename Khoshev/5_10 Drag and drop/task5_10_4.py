@@ -10,20 +10,20 @@ with (webdriver.Chrome() as driver):
     driver.set_window_size(1000, 1500)
 
     time.sleep(3)
-    element_locator = ('xpath', '//div[contains(@class, "draganddrop")]')
-    targets_locator = ('xpath', '//div[@class="draganddrop_end"]')
+    element_locator = ('id', 'draggable')
+    targets_locator = ('xpath', '//div[@class="box"]')
 
     result_locator = ('id', 'message')
 
     action = ActionChains(driver)
 
-    elements = driver.find_elements(*element_locator)
-    elements = elements[:-1]
-    target = driver.find_element(*targets_locator)
+    element = driver.find_element(*element_locator)
 
-    for element in elements:
-        action.click_and_hold(element).drag_and_drop_by_offset(element, 1150, 0).release().perform()
+    targets = driver.find_elements(*targets_locator)
 
+    for target in targets:
+        # action.click_and_hold(element).drag_and_drop_by_offset(element, 1150, 0).release().perform()
+        action.drag_and_drop(element, target).perform()
     time.sleep(3)
 
     print(driver.find_element(*result_locator).text)
