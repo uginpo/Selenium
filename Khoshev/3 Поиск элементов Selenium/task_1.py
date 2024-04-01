@@ -12,6 +12,5 @@ with webdriver.Chrome() as driver:
         content.send_keys('Text')
     butt.click()
 
-
     time.sleep(10)
 
